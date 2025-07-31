@@ -1,4 +1,5 @@
 """Tests for the agent service."""
+import os
 import pytest
 from agent.service import AgentService
 
@@ -15,7 +16,7 @@ def test_agent_service_initialization():
 
 # Skip this test if no API key is available
 @pytest.mark.skipif(
-    "OPENAI_API_KEY" not in pytest.MonkeyPatch().environ, 
+    "OPENAI_API_KEY" not in os.environ, 
     reason="OpenAI API key not available"
 )
 def test_get_response():
