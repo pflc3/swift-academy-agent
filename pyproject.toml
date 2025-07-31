@@ -6,7 +6,7 @@ authors = [
     {name = "Estuardo Lopez Letona",email = "estulpzlet@gmail.com"}
 ]
 readme = "README.md"
-requires-python = "^3.13"
+requires-python = ">=3.13"
 dependencies = [
     "fastapi (>=0.116.1,<0.117.0)",
     "openai (>=1.20.0)",
