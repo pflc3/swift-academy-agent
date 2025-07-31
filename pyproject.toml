@@ -1,0 +1,57 @@
+[project]
+name = "gcode-academy-agent"
+version = "0.1.0"
+description = "AI assistant agent for Gcode Academy app"
+authors = [
+    {name = "Estuardo Lopez Letona",email = "estulpzlet@gmail.com"}
+]
+readme = "README.md"
+requires-python = "^3.13"
+dependencies = [
+    "fastapi (>=0.116.1,<0.117.0)",
+    "openai (>=1.20.0)",
+    "python-dotenv (>=1.1.1,<2.0.0)",
+    "pydantic (>=2.11.7,<3.0.0)"
+]
+
+[tool.poetry]
+packages = [
+  { include = "agent", from = "src" },
+  { include = "api", from = "src" }
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.1"
+ruff = "^0.12.7"
+uvicorn = {extras = ["standard"], version = "^0.35.0"}
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+lint.select = [
+  "F",      # pyflakes (default)
+  "E", "W", # pycodestyle (default)
+  "I",      # isort (default)
+  "N",      # pep8-naming
+  "D",      # pydocstyle (docstrings)
+  "B",      # flake8-bugbear (common bugs / bad practices)
+  "C4",     # flake8-comprehensions
+  "ERA",    # eradicate (remove commented-out code)
+  "PL",     # pylint-style rules
+  "UP",     # pyupgrade (Python 3 idioms)
+]
+
+lint.ignore = [
+  "D107",   # don't require docstrings on __init__
+  "D203",   # conflicting docstring formatting rules
+  "D212",   # ignore first-line summary rule
+  "D413",   # allow no blank line after "Returns" section
+  "D100",   # allow no docstring in public module
+  "D401",   # allows docstring to not be in imperative mood
+  "PLW0603" # allows using global to update global vars
+]

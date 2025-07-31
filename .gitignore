@@ -1,0 +1,22 @@
+# Ignore Python cache files and folders
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore virtual environments (if used locally in backend)
+.venv
+
+# Ignore build artifacts
+dist/
+build/
+*.egg-info/
+
+# Ignore Poetry/test/tool caches
+.cache/
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+
+# Environment variables
+.env
