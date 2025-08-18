@@ -1,7 +1,7 @@
 """API data models for requests and responses."""
 from typing import Any
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field # type: ignore
 
 
 class Message(BaseModel):

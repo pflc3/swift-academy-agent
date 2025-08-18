@@ -1,5 +1,5 @@
 """API routes for the Gcode Academy Agent."""
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException # type: ignore
 
 from agent.service import AgentService
 from api.models import ChatRequest, ChatResponse, Message
