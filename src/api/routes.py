@@ -14,7 +14,7 @@ agent_service = AgentService()
 @router.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
     """
-    Process a chat request and return a response.
+    Process a chat request and return an assistant message.
 
     Args:
         request: The chat request containing messages and optional context
@@ -30,20 +30,11 @@ async def chat(request: ChatRequest):
         response_text = agent_service.get_response(
             messages=messages_dict,
             user_id=request.user_id,
-            context=request.context
+            context=request.context,
         )
 
-        # Return the response
-        return ChatResponse(
-            message=Message(role="assistant", content=response_text)
-        )
+        return ChatResponse(message=Message(role="assistant", content=response_text))
 
     except Exception as e:
-        # Log the error
-        print(f"Error processing chat request: {e}")
-
-        # Raise HTTP exception
-        raise HTTPException(
-            status_code=500,
-            detail="An error occurred while processing your request"
-        ) from e
+        print(f"[api] error /chat: {e}")
+        raise HTTPException(status_code=500, detail="Chat processing error") from e

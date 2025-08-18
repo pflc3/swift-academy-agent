@@ -1,33 +1,32 @@
-"""API data models for requests and responses."""
+"""API data models for chat requests and responses."""
+
 from typing import Any
 
 from pydantic import BaseModel, Field  # type: ignore
 
 
 class Message(BaseModel):
-    """Model for a chat message."""
+    """Represents a single chat message in role/content form."""
 
-    role: str = Field(
-        ...,
-        description="The role of the message sender (system, user, or assistant)"
-    )
-    content: str = Field(..., description="The content of the message")
+    role: str = Field(..., description="system, user, or assistant")
+    content: str = Field(..., description="message text")
 
 
 class ChatRequest(BaseModel):
-    """Model for chat requests."""
+    """
+    Request body for /chat.
 
-    messages: list[Message] = Field(
-        ...,
-        description="List of previous messages in the conversation"
-    )
-    user_id: str | None = Field(None, description="Optional user identifier")
-    context: dict[str, Any] | None = Field(
-        None, description="Optional context information (e.g., current lesson)"
-    )
+    messages: conversation so far
+    user_id: optional client identifier
+    context: optional domain/lesson info for shaping responses
+    """
+
+    messages: list[Message] = Field(..., description="conversation so far")
+    user_id: str | None = Field(None, description="optional user identifier")
+    context: dict[str, Any] | None = Field(None, description="optional context (e.g., lesson)")
 
 
 class ChatResponse(BaseModel):
-    """Model for chat responses."""
+    """Response body containing a single assistant message."""
 
-    message: Message = Field(..., description="The assistant's response message")
+    message: Message = Field(..., description="assistant reply")
