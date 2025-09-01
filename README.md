@@ -1,6 +1,6 @@
-# Gcode Academy Agent
+# Swift Academy Agent
 
-This is the backend AI assistant for the Gcode Academy app. It provides a FastAPI-based API server that integrates with OpenAI's API to power the in-app tutoring assistant.
+This is the backend AI assistant for the Swift Academy app. It provides a FastAPI-based API server that integrates with OpenAI's API to power the in-app tutoring assistant.
 
 ## How to Run
 

@@ -1,4 +1,4 @@
-"""Main FastAPI application for the Gcode Academy Agent."""
+"""Main FastAPI application for the Swift Academy Agent."""
 import uvicorn  # type: ignore
 from fastapi import FastAPI  # type: ignore
 from fastapi.middleware.cors import CORSMiddleware  # type: ignore
@@ -7,8 +7,8 @@ from api.routes import router
 
 # Create FastAPI application
 app = FastAPI(
-    title="Gcode Academy Agent",
-    description="AI assistant agent for Gcode Academy app",
+    title="Swift Academy Agent",
+    description="AI assistant agent for Swift Academy app",
     version="0.1.0",
 )
 
@@ -30,7 +30,7 @@ async def root():
     """Root endpoint - health check and welcome message."""
     return {
         "status": "online",
-        "message": "Welcome to the Gcode Academy Agent API",
+        "message": "Welcome to the Swift Academy Agent API",
         "documentation": "/docs",
     }
 

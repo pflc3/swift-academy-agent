@@ -1,4 +1,4 @@
-"""API routes for the Gcode Academy Agent."""
+"""API routes for the Swift Academy Agent."""
 from fastapi import APIRouter, HTTPException  # type: ignore
 
 from agent.service import AgentService

@@ -1,7 +1,7 @@
 [project]
-name = "gcode-academy-agent"
+name = "swift-academy-agent"
 version = "0.1.0"
-description = "AI assistant agent for Gcode Academy app"
+description = "AI assistant agent for the Swift Academy app"
 authors = [
     {name = "Estuardo Lopez Letona",email = "estulpzlet@gmail.com"}
 ]
