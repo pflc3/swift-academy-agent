@@ -9,6 +9,7 @@ Key responsibilities:
 """
 
 import os
+from types import SimpleNamespace
 from typing import Any
 
 from dotenv import load_dotenv  # type: ignore
@@ -19,16 +20,24 @@ load_dotenv()
 
 # Get OpenAI API key from environment variables
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-if not OPENAI_API_KEY:
-    raise ValueError("OPENAI_API_KEY environment variable is not set")
 
 # Model & generation defaults (tunable without code changes)
 DEFAULT_MODEL = os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")
 DEFAULT_TEMPERATURE = float(os.getenv("OPENAI_TEMPERATURE", "0.7"))
 DEFAULT_MAX_TOKENS = int(os.getenv("OPENAI_MAX_TOKENS", "900"))
 
-# OpenAI client
-client = OpenAI(api_key=OPENAI_API_KEY)
+# OpenAI client (safe-by-default)
+if OPENAI_API_KEY:
+    client = OpenAI(api_key=OPENAI_API_KEY)
+else:
+    # Dummy client for test/CI/dev without a key
+    def _noapi(**kwargs):
+        raise RuntimeError("OPENAI_API_KEY not set (dev/test mode)")
+    client = SimpleNamespace(
+        chat=SimpleNamespace(
+            completions=SimpleNamespace(create=_noapi)
+        )
+    )
 
 SOCRATIC_SYSTEM = """
 You are the Code Coach — a friendly, helpful AI mentor built to teach computer science
@@ -144,4 +153,4 @@ class AgentService:
         except Exception as e:
             # Fail safe: never leak raw errors to the student
             print(f"[agent] OpenAI error: {e}")
-            return "I'm having trouble responding right now. Please try again in a moment."
+            return "Coach is offline right now. Please try again later."
